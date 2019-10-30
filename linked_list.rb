@@ -8,6 +8,56 @@ class LinkedListNode
   end
 end
 
+#OUTPUT HERE
+def print_values(list_node)
+  if list_node
+    print "#{list_node.data_value} --> "
+    print_values(list_node.pointer)
+  else
+    print "nil\n"
+    return
+  end
+end
+
+def reverse_list(list, previous=nil)
+  new_head = list.pointer
+  # puts new_head
+  list.pointer = previous
+  if new_head
+    reverse_list(new_head, list)
+  else
+  return print_values(list)  
+  end
+end
+
+def infinite_loop (list)
+  # isitnilcounter = list.pointer
+  isitnil = list.pointer
+  list.pointer
+  isitnilcounter = list.pointer
+
+  while isitnil != nil
+    # puts "Is this even starting"
+    #first step check if there is an end of the list
+    isitnil = isitnil.pointer
+    # puts isitnil
+    if isitnil.nil?
+      puts "False"
+    end
+    #second step, check if 
+    isitnil = isitnil.pointer
+    # puts isitnil
+    isitnilcounter = isitnilcounter.pointer
+    # puts isitnil 
+    # puts isitnilcounter
+    if isitnil == isitnilcounter
+      puts "True"
+    end
+  puts "false"
+  end
+end
+
+
 class Stack
   attr_reader :data_value, :pointer
 
@@ -39,39 +89,18 @@ class Stack
   def is_empty
     @head_value.nil?
   end
-
-  def reverse_list(list)
-    current_node = @head_value
-    prev_node = nil
-
-    while (current_node != nil)
-      secondstack = current_node.next
-      current_node.next = prev_node
-      prev_node = current_node
-      current_node = secondstack
-    end
-    list.head_value = prev_node
-    puts "THIS IS THE LIST #{list}"
-  end
-
-  #OUTPUT HERE
-  def print_values(list_node)
-    if list_node
-      print "#{list_node.value} --> "
-      print_values(list_node.next_node)
-    else
-      print "nil\n"
-      return
-    end
-  end
-
 end
 
-stack = Stack.new
-stack.push(1)
-stack.push(42)
-puts stack.pop
-puts stack.pop
-puts stack.pop
+node1 = LinkedListNode.new(37)
+node2 = LinkedListNode.new(99, node1)
+node3 = LinkedListNode.new(12, node2)
+# node1.pointer = node3
 
+print_values(node3)
+infinite_loop(node3)
 
+puts "-------"
+
+revlist = reverse_list(node3)
+
+# print_values(revlist)
